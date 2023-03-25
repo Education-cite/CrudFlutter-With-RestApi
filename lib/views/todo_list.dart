@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:crud/views/add_page.dart';
+import 'package:crud/views/services/todo_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -87,11 +88,9 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
   Future<void> deleteById(String id) async {
-    final url = 'https://api.nstack.in/v1/todos/$id';
-    final uri = Uri.parse(url);
-    final response = await http.delete(uri);
-
-    if (response.statusCode == 200) {
+   
+      final issuccess = await TodoService.deleteById(id);
+    if (issuccess) {
       final filtered = items.where((element) => element['_id'] != id).toList();
       setState(() {
         items = filtered;
@@ -103,19 +102,11 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
   Future<void> fetchTodo() async {
-    final url = 'https://api.nstack.in/v1/todos?page=1&limit=10';
-    // final url = 'http://192.168.0.107:8080/users';
-
-    final uri = Uri.parse(url);
-    final response = await http.get(uri);
-    //  print(response.statusCode);
-    //  print(response.body);
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body) as Map;
-
-      final result = json['items'] as List;
+  final response = await TodoService.fetchTodo();
+    if (response!=null) {
+     
       setState(() {
-        items = result;
+        items = response;
       });
       print('Get Data Success');
     } else {
