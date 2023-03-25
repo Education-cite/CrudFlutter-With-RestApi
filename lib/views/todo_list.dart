@@ -39,13 +39,14 @@ class _TodoListPageState extends State<TodoListPage> {
           onRefresh: fetchTodo,
           child: Visibility(
             visible: items.isNotEmpty,
-            replacement: Center(child: Text(
-              'No Todo item',
-              style: Theme.of(context).textTheme.headline3,
-            ),
+            replacement: Center(
+              child: Text(
+                'No Todo item',
+                style: Theme.of(context).textTheme.headline3,
+              ),
             ),
             child: ListView.builder(
-              padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   final item = items[index] as Map;
@@ -57,9 +58,8 @@ class _TodoListPageState extends State<TodoListPage> {
                       title: Text(item['title']),
                       subtitle: Text(item['description']),
                       trailing: PopupMenuButton(onSelected: (value) {
-                        if (value == 'edit') {              
-                            NavigatetoEditPage(item);
-                              
+                        if (value == 'edit') {
+                          NavigatetoEditPage(item);
                         } else if (value == 'delete') {
                           deleteById(id);
                         }
@@ -82,14 +82,12 @@ class _TodoListPageState extends State<TodoListPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: NavigatetoaddPage,
-          label: Text("Add Todo")),
+          onPressed: NavigatetoaddPage, label: Text("Add Todo")),
     );
   }
 
   Future<void> deleteById(String id) async {
-   
-      final issuccess = await TodoService.deleteById(id);
+    final issuccess = await TodoService.deleteById(id);
     if (issuccess) {
       final filtered = items.where((element) => element['_id'] != id).toList();
       setState(() {
@@ -102,9 +100,8 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
   Future<void> fetchTodo() async {
-  final response = await TodoService.fetchTodo();
-    if (response!=null) {
-     
+    final response = await TodoService.fetchTodo();
+    if (response != null) {
       setState(() {
         items = response;
       });
@@ -118,31 +115,25 @@ class _TodoListPageState extends State<TodoListPage> {
     });
   }
 
-   Future<void> NavigatetoEditPage(Map item)async{
-      final route = MaterialPageRoute(builder: (context)=>AddTodoPage(todo:item )
-      );
-    await  Navigator.push(context, route);
-       setState(() {
-       isloading=true;
-      });
+  Future<void> NavigatetoEditPage(Map item) async {
+    final route =
+        MaterialPageRoute(builder: (context) => AddTodoPage(todo: item));
+    await Navigator.push(context, route);
+    setState(() {
+      isloading = true;
+    });
 
-       fetchTodo();
-    }
+    fetchTodo();
+  }
 
+  Future<void> NavigatetoaddPage() async {
+    final route = MaterialPageRoute(builder: (context) => AddTodoPage());
+    await Navigator.push(context, route);
 
-   Future<void> NavigatetoaddPage()async{
-      final route = MaterialPageRoute(builder: (context)=>AddTodoPage(
+    setState(() {
+      isloading = true;
+    });
 
-      )
-      );
-     await Navigator.push(context, route);
-
-      setState(() {
-       isloading=true;
-      });
-
-       fetchTodo();
-    }
-
-
+    fetchTodo();
+  }
 }

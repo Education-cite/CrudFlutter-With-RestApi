@@ -19,22 +19,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter SpringBoot Crud',
       theme: ThemeData(
-      
         primarySwatch: Colors.blue,
       ),
-     home: TodoListPage(),
+      home: TodoListPage(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-     //    "/ListUsers":(context) => ListUsers(),
-    //    "/RegisterPage":(context) => RegisterPage(),
-       
-
-
-
+        //    "/ListUsers":(context) => ListUsers(),
+        //    "/RegisterPage":(context) => RegisterPage(),
       },
     );
   }
 }
-
-
