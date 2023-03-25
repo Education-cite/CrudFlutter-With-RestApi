@@ -36,37 +36,41 @@ class _TodoListPageState extends State<TodoListPage> {
         ),
         replacement: RefreshIndicator(
           onRefresh: fetchTodo,
-          child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                final item = items[index] as Map;
-                final id = item['_id'] as String;
-                return ListTile(
-                  // title: Text(item.toString()),
-                  leading: CircleAvatar(child: Text('${index + 1}')),
-                  title: Text(item['title']),
-                  subtitle: Text(item['description']),
-                  trailing: PopupMenuButton(onSelected: (value) {
-                    if (value == 'edit') {              
-                        NavigatetoEditPage(item);
-                          
-                    } else if (value == 'delete') {
-                      deleteById(id);
-                    }
-                  }, itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(
-                        child: Text("Edit"),
-                        value: 'edit',
-                      ),
-                      PopupMenuItem(
-                        child: Text("Delete"),
-                        value: 'delete',
-                      ),
-                    ];
-                  }),
-                );
-              }),
+          child: Visibility(
+            visible: items.isNotEmpty,
+            replacement: Center(child: Text('No Todo item'),),
+            child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index] as Map;
+                  final id = item['_id'] as String;
+                  return ListTile(
+                    // title: Text(item.toString()),
+                    leading: CircleAvatar(child: Text('${index + 1}')),
+                    title: Text(item['title']),
+                    subtitle: Text(item['description']),
+                    trailing: PopupMenuButton(onSelected: (value) {
+                      if (value == 'edit') {              
+                          NavigatetoEditPage(item);
+                            
+                      } else if (value == 'delete') {
+                        deleteById(id);
+                      }
+                    }, itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(
+                          child: Text("Edit"),
+                          value: 'edit',
+                        ),
+                        PopupMenuItem(
+                          child: Text("Delete"),
+                          value: 'delete',
+                        ),
+                      ];
+                    }),
+                  );
+                }),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
