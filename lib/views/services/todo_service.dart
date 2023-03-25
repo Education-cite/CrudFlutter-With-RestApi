@@ -1,10 +1,14 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
+//other new------------
+
+
 class TodoService {
+
   static Future<bool> deleteById(String id) async {
     final url = 'https://api.nstack.in/v1/todos/$id';
+   // final url = 'http://192.168.0.107:8080/delete/$id';
     final uri = Uri.parse(url);
     final response = await http.delete(uri);
     return response.statusCode == 200;
@@ -12,7 +16,7 @@ class TodoService {
 
   static Future<List?> fetchTodo() async {
     final url = 'https://api.nstack.in/v1/todos?page=1&limit=10';
-    // final url = 'http://192.168.0.107:8080/users';
+   // final url = 'http://192.168.0.107:8080/users';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
 
@@ -24,11 +28,12 @@ class TodoService {
     } else {
       return null;
     }
+    
   }
 
   static Future<bool> updateData(String id, Map body) async {
     final url = 'https://api.nstack.in/v1/todos/$id';
-    //  final url = 'http://192.168.0.107:8080/update';
+   //  final url = 'http://192.168.0.107:8080/update/$id';
 
     final uri = Uri.parse(url);
     final response = await http.put(
@@ -49,6 +54,6 @@ class TodoService {
       body: jsonEncode(body),
       headers: {'Content-Type': 'application/json'},
     );
-    return response.statusCode == 201;
+    return response.statusCode == 200;
   }
 }
