@@ -60,7 +60,7 @@ class _EditPostState extends State<EditPost> {
                             .showSnackBar(SnackBar(content: Text('Failed to update the post')));
                       }
                   },
-                  child: Text('Submit'))
+                  child: Text('Update'))
             ],
           ),
         ),
