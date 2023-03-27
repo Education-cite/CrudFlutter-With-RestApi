@@ -1,4 +1,5 @@
 import 'package:crud/controllers/databasehelpers.dart';
+import 'package:crud/new_tutorial/screens/posts_list.dart';
 import 'package:crud/views/HomePage.dart';
 import 'package:crud/views/RegisterPage.dart';
 import 'package:crud/views/add_page.dart';
@@ -21,7 +22,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TodoListPage(),
+      // home: TodoListPage(),
+      // home: ListUsers(),
+       home: PostsList(),
+
+
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
