@@ -37,7 +37,7 @@ class PostsList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   Map thisItem = posts[index];
                   return ListTile(
-                    title: Text('${thisItem['title']}'),
+                    title: Text('${thisItem['email']}'),
                     subtitle: Text('${thisItem['body']}'),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(

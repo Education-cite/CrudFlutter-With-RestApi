@@ -18,7 +18,7 @@ class _EditPostState extends State<EditPost> {
 
   initState() {
     super.initState();
-    _controllerTitle.text = widget.post['title'];
+    _controllerTitle.text = widget.post['email'];
     _controllerBody.text = widget.post['body'];
   }
 
@@ -43,7 +43,7 @@ class _EditPostState extends State<EditPost> {
               ElevatedButton(
                   onPressed: () async {
                     Map<String, String> dataToUpdate = {
-                      'title': _controllerTitle.text,
+                      'email': _controllerTitle.text,
                       'body': _controllerBody.text,
                     };
 

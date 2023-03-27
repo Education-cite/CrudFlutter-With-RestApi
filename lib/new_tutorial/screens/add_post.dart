@@ -24,7 +24,7 @@ class _AddPostState extends State<AddPost> {
           child: Column(
             children: [
               TextFormField(
-                decoration: InputDecoration(hintText: 'Add a title'),
+                decoration: InputDecoration(hintText: 'Add a email'),
                 controller: _controllerTitle,
               ),
               TextFormField(
@@ -35,7 +35,7 @@ class _AddPostState extends State<AddPost> {
               ElevatedButton(
                   onPressed: () async {
                     Map<String, String> dataToUpdate = {
-                      'title': _controllerTitle.text,
+                      'email': _controllerTitle.text,
                       'body': _controllerBody.text,
                     };
 

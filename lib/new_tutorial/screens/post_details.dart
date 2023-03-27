@@ -53,7 +53,7 @@ class PostDetails extends StatelessWidget {
             return Column(
               children: [
                 Text(
-                  '${post['title']}',
+                  '${post['email']}',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text('${post['body']}'),
